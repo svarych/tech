@@ -2,6 +2,7 @@ package com.tober.iotech;
 
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -38,8 +39,7 @@ public class MainTests {
     @Test
     void changeReports() throws InterruptedException {
         selectProject();
-        new HomePage().closePopUp()
-                .closeTab("Хайлоад")
+        new HomePage().closePopUp().closeTab("Хайлоад")
 
                 // 1. Меню: Переключение между отчетами (Home / Articles / Authors).
                 .goToEditorial(HomePage.EditorialMenu.AUTHORS)
@@ -54,8 +54,7 @@ public class MainTests {
     @Test
     void changeTimeFrames() throws InterruptedException {
         selectProject();
-        new HomePage().closePopUp()
-                .closeTab("Хайлоад")
+        new HomePage().closePopUp().closeTab("Хайлоад")
 
                 // Пройтись по таймфреймам
                 .goToTimeFrame(HomePage.TimeFrames.MONTH)
@@ -71,6 +70,8 @@ public class MainTests {
     void filterByAuthors() throws InterruptedException {
         selectProject();
         new HomePage().closePopUp().closeTab("Хайлоад")
+
+                // Проверям что статьи принадлежат заявленным авторам
                 .goToEditorial(HomePage.EditorialMenu.AUTHORS)
                 .checkAuthors(HomePage.TimeFrames.MONTH);
     }
@@ -79,9 +80,12 @@ public class MainTests {
     void sortingVariants() throws InterruptedException {
         selectProject();
         new HomePage().closePopUp().closeTab("Хайлоад")
+
+                // Фильтр по авторам за месяц
                 .goToEditorial(HomePage.EditorialMenu.AUTHORS)
                 .goToTimeFrame(HomePage.TimeFrames.MONTH)
 
+                // Проверка лучших/худших авторов по метрикам
                 .checkBestWorst(HomePage.Metric.FINISHED_READING)
                 .checkBestWorst(HomePage.Metric.PAGE_VIEWS);
     }

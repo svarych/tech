@@ -6,11 +6,15 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.logging.Level;
+
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class ArticleTests {
 
@@ -38,5 +42,10 @@ public class ArticleTests {
     @Test
     void articleTest2() throws IOException {
         new ArticlePage().requestSent("Как узнать версию Mysql");
+    }
+
+    @AfterTest
+    void closeBrowserAfterMethod(){
+        getWebDriver().quit();
     }
 }
