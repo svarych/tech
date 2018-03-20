@@ -1,7 +1,6 @@
 package com.tober.iotech;
 
 import com.codeborne.selenide.WebDriverRunner;
-import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
@@ -13,11 +12,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.logging.Level;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-
-public class Tests {
+public class ArticleTests {
 
     @BeforeTest
     void setUp() {
@@ -26,29 +21,8 @@ public class Tests {
         preferences.enable(LogType.PERFORMANCE, Level.ALL);
         options.setCapability(CapabilityType.LOGGING_PREFS, preferences);
         options.addArguments("start-maximized");
+        options.addArguments("test-type");
         WebDriverRunner.setWebDriver(new ChromeDriver(options));
-    }
-
-    /**
-     * Вход в систему
-     */
-    @Test
-    void logIn() {
-//        new AuthPage().email("gexibawer@one2mail.info").password("q").enter();
-        open("https://onthe.io/auth");
-
-        getWebDriver().switchTo().window(getWebDriver().getWindowHandles().toArray()[0].toString());
-        $(By.xpath("//input[@name='email']")).setValue("my@email");
-
-    }
-
-    /**
-     * Выбор проекта
-     */
-    @Test
-    void selectProject() {
-        logIn();
-        new ProjectsPage(" RuHighload (prod)");
     }
 
     @Test

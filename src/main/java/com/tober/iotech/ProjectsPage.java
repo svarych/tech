@@ -1,16 +1,23 @@
 package com.tober.iotech;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class ProjectsPage {
 
-    public ProjectsPage(String project) {
-        selectProject(project);
+    private WebElement projectLink;
+
+    public ProjectsPage project(String project) {
+        projectLink = $(By.xpath("//a/li[.='" + project + "']"));
+        projectLink.click();
+        return this;
     }
 
-    private void selectProject(String name) {
-        $(By.xpath("//a/li[.='" + name + "']")).click();
+    public boolean selected() {
+        return !$(projectLink).waitUntil(Condition.not(Condition.visible), 15000).is(Condition.visible);
     }
+
 }

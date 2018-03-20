@@ -1,5 +1,6 @@
 package com.tober.iotech;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -21,7 +22,13 @@ public class AuthPage {
         return this;
     }
 
-    public void enter() {
+    public AuthPage enter() {
         $(By.id("auth")).submit();
+        return this;
+    }
+
+    public boolean loggedIn(){
+        $(By.tagName("h1")).waitUntil(Condition.text("Welcome to .io, "), 10000);
+        return true;
     }
 }
