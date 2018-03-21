@@ -12,6 +12,7 @@ import java.io.IOException;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static com.codeborne.selenide.WebDriverRunner.source;
 
 public class ArticlePage {
 
@@ -30,7 +31,7 @@ public class ArticlePage {
                 if (node.findValue("method").toString().equals("\"Network.requestWillBeSent\"")) {
                     status.append("O");
                 }
-                if (node.findValue("method").toString().equals("\"Network.responseReceived\"")) {
+                if (node.findValue("method").toString().equals("\"Network.responseReceived\"") && node.findValue("headersText").toString().contains("200 OK")) {
                     status.append("K");
                 }
             }
