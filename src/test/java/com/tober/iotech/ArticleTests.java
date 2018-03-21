@@ -36,12 +36,12 @@ public class ArticleTests {
 
     @Test
     void articleTest1() throws IOException {
-        new ArticlePage().requestSent("Ошибка 504");
+        assert new ArticlePage().requestSent("Ошибка 504");
     }
 
     @Test
     void articleTest2() throws IOException {
-        new ArticlePage().requestSent("Как узнать версию Mysql");
+        assert new ArticlePage().requestSent("Как узнать версию Mysql");
     }
 
     @AfterTest
